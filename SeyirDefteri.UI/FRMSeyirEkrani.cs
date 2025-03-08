@@ -83,11 +83,78 @@ namespace SeyirDefteri.UI
 
         }
 
+        private void ListViewOlustur()
+        {
+            lwSeferKaydi.View = View.Details;  //Detaylý görünüm için
+            lwSeferKaydi.GridLines = true;    //Çizgiler için
+
+            lwSeferKaydi.Columns.Add("Id", 40);
+            lwSeferKaydi.Columns.Add("Gemi", 200, HorizontalAlignment.Center);
+            lwSeferKaydi.Columns.Add("Çýkýþ Tarihi", 140, HorizontalAlignment.Center);
+            lwSeferKaydi.Columns.Add("Varýþ Tarihi", 140, HorizontalAlignment.Center);
+            lwSeferKaydi.Columns.Add("Çýkýþ Limaný", 225, HorizontalAlignment.Center);
+            lwSeferKaydi.Columns.Add("Uðradýðý Liman", 225, HorizontalAlignment.Center);
+            lwSeferKaydi.Columns.Add("Varýþ Limaný", 225, HorizontalAlignment.Center);
+        }
+
 
         private void FRMSeyirEkrani_Load(object sender, EventArgs e)
         {
             GemileriOlustur();
             LimanlariOlustur();
+            ListViewOlustur();
+            dtpLimandanCikisTarihi.Select();
+        }
+
+        int ýd = 1;
+        private void btnSeferOlustur_Click(object sender, EventArgs e)
+        {
+            if (dtpLimandanCikisTarihi.Value.Date > dtpLimanaVarisTarihi.Value.Date)
+            {
+                MessageBox.Show("Geminin limana varýþ tarihi, limandan çýkýþ tarihinden erken olamaz!");
+                return;
+            }
+            if (cbGemi.SelectedItem == null || cbCikisLimani.SelectedItem == null || cbUgradigiLiman.SelectedItem == null || cbVarisLimani.SelectedItem == null)
+            {
+                MessageBox.Show("Gemi alaný, çýkýþ limaný, uðradýðý liman ve varýþ liman alanlarý boþ geçilemez!");
+                return;
+            }
+            if (cbCikisLimani.SelectedItem == cbVarisLimani.SelectedItem || cbCikisLimani.SelectedItem == cbUgradigiLiman.SelectedItem || cbUgradigiLiman.SelectedItem == cbVarisLimani.SelectedItem)
+            {
+                MessageBox.Show("Çýkýþ limaný, uðradýðý liman veya varýþ limanlarý ayný olamaz!");
+                return;
+            }
+
+            SeyirKaydi seyirKaydi = new SeyirKaydi();
+            seyirKaydi.Gemi = cbGemi.SelectedItem as Gemi;
+            seyirKaydi.LimandanCikisTarihi = dtpLimandanCikisTarihi.Value;
+            seyirKaydi.LimanaVarisTarihi = dtpLimanaVarisTarihi.Value;
+            seyirKaydi.CikisLimani = cbCikisLimani.SelectedItem.ToString();
+            seyirKaydi.UgrayacagiLiman = cbUgradigiLiman.SelectedItem.ToString();
+            seyirKaydi.VarisLimani = cbVarisLimani.SelectedItem.ToString();
+
+
+            ListViewItem listViewItem = new ListViewItem();
+            listViewItem.Text = (ýd++).ToString();
+            listViewItem.SubItems.Add(seyirKaydi.Gemi.ToString());
+            listViewItem.SubItems.Add(seyirKaydi.LimandanCikisTarihi.ToShortDateString());
+            listViewItem.SubItems.Add(seyirKaydi.LimanaVarisTarihi.ToShortDateString());
+            listViewItem.SubItems.Add(seyirKaydi.CikisLimani);
+            listViewItem.SubItems.Add(seyirKaydi.UgrayacagiLiman);
+            listViewItem.SubItems.Add(seyirKaydi.VarisLimani);
+
+            lwSeferKaydi.Items.Add(listViewItem);
+            Temizle();
+        }
+
+        private void Temizle()
+        {
+            dtpLimandanCikisTarihi.Value = DateTime.Now; //Varsayýlan olarak bugünü ayarlar.
+            dtpLimanaVarisTarihi.Value = DateTime.Now;
+            cbGemi.SelectedIndex = -1;
+            cbCikisLimani.SelectedIndex = -1;
+            cbUgradigiLiman.SelectedIndex = -1;
+            cbVarisLimani.SelectedIndex = -1;
         }
     }
 }

@@ -12,8 +12,9 @@ namespace SeyirDefteri.Core.Data
         public Gemi Gemi { get; set; }
         public DateTime LimandanCikisTarihi { get; set; }
         public DateTime LimanaVarisTarihi { get; set; }
+        public string CikisLimani { get; set; }
         public string UgrayacagiLiman { get; set; }
         public string VarisLimani { get; set; }
-        public string CikisLimani { get; set; }
+        
     }
 }

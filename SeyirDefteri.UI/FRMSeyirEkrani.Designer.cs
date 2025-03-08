@@ -147,18 +147,19 @@
             // btnSeferOlustur
             // 
             btnSeferOlustur.BackColor = SystemColors.GradientActiveCaption;
-            btnSeferOlustur.Location = new Point(847, 253);
+            btnSeferOlustur.Location = new Point(942, 254);
             btnSeferOlustur.Name = "btnSeferOlustur";
-            btnSeferOlustur.Size = new Size(230, 60);
+            btnSeferOlustur.Size = new Size(294, 60);
             btnSeferOlustur.TabIndex = 4;
             btnSeferOlustur.Text = "Sefer Oluştur";
             btnSeferOlustur.UseVisualStyleBackColor = false;
+            btnSeferOlustur.Click += btnSeferOlustur_Click;
             // 
             // lwSeferKaydi
             // 
-            lwSeferKaydi.Location = new Point(55, 341);
+            lwSeferKaydi.Location = new Point(39, 341);
             lwSeferKaydi.Name = "lwSeferKaydi";
-            lwSeferKaydi.Size = new Size(1022, 222);
+            lwSeferKaydi.Size = new Size(1197, 262);
             lwSeferKaydi.TabIndex = 5;
             lwSeferKaydi.UseCompatibleStateImageBehavior = false;
             // 
@@ -167,7 +168,7 @@
             AutoScaleDimensions = new SizeF(13F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            ClientSize = new Size(1136, 601);
+            ClientSize = new Size(1295, 637);
             Controls.Add(lwSeferKaydi);
             Controls.Add(btnSeferOlustur);
             Controls.Add(cbVarisLimani);
