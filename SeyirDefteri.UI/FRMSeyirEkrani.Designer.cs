@@ -41,6 +41,7 @@
             cbUgradigiLiman = new ComboBox();
             cbVarisLimani = new ComboBox();
             btnSeferOlustur = new Button();
+            btnGec = new Button();
             lwSeferKaydi = new ListView();
             SuspendLayout();
             // 
@@ -147,7 +148,7 @@
             // btnSeferOlustur
             // 
             btnSeferOlustur.BackColor = SystemColors.GradientActiveCaption;
-            btnSeferOlustur.Location = new Point(942, 254);
+            btnSeferOlustur.Location = new Point(814, 253);
             btnSeferOlustur.Name = "btnSeferOlustur";
             btnSeferOlustur.Size = new Size(294, 60);
             btnSeferOlustur.TabIndex = 4;
@@ -155,12 +156,23 @@
             btnSeferOlustur.UseVisualStyleBackColor = false;
             btnSeferOlustur.Click += btnSeferOlustur_Click;
             // 
+            // btnGec
+            // 
+            btnGec.BackColor = SystemColors.GradientActiveCaption;
+            btnGec.Location = new Point(45, 617);
+            btnGec.Name = "btnGec";
+            btnGec.Size = new Size(1548, 56);
+            btnGec.TabIndex = 6;
+            btnGec.Text = ">>>";
+            btnGec.UseVisualStyleBackColor = false;
+            btnGec.Click += btnGec_Click;
+            // 
             // lwSeferKaydi
             // 
-            lwSeferKaydi.Location = new Point(39, 341);
+            lwSeferKaydi.Location = new Point(45, 337);
             lwSeferKaydi.Name = "lwSeferKaydi";
-            lwSeferKaydi.Size = new Size(1197, 262);
-            lwSeferKaydi.TabIndex = 5;
+            lwSeferKaydi.Size = new Size(1548, 274);
+            lwSeferKaydi.TabIndex = 7;
             lwSeferKaydi.UseCompatibleStateImageBehavior = false;
             // 
             // FRMSeyirEkrani
@@ -168,8 +180,9 @@
             AutoScaleDimensions = new SizeF(13F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            ClientSize = new Size(1295, 637);
+            ClientSize = new Size(1669, 765);
             Controls.Add(lwSeferKaydi);
+            Controls.Add(btnGec);
             Controls.Add(btnSeferOlustur);
             Controls.Add(cbVarisLimani);
             Controls.Add(cbCikisLimani);
@@ -207,6 +220,7 @@
         private ComboBox cbUgradigiLiman;
         private ComboBox cbVarisLimani;
         private Button btnSeferOlustur;
+        private Button btnGec;
         private ListView lwSeferKaydi;
     }
 }

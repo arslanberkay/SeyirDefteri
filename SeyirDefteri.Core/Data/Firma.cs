@@ -10,5 +10,10 @@ namespace SeyirDefteri.Core.Data
     {
         public int FirmaId { get; set; }
         public string FirmaAdi { get; set; }
+
+        public override string ToString()
+        {
+            return FirmaAdi;
+        }
     }
 }

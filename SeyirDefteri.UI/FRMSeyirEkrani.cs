@@ -4,6 +4,8 @@ namespace SeyirDefteri.UI
 {
     public partial class FRMSeyirEkrani : Form
     {
+        public static List<SeyirKaydi> SeyirKayitlari = new List<SeyirKaydi>();
+
         public FRMSeyirEkrani()
         {
             InitializeComponent();
@@ -125,14 +127,16 @@ namespace SeyirDefteri.UI
                 return;
             }
 
-            SeyirKaydi seyirKaydi = new SeyirKaydi();
-            seyirKaydi.Gemi = cbGemi.SelectedItem as Gemi;
-            seyirKaydi.LimandanCikisTarihi = dtpLimandanCikisTarihi.Value;
-            seyirKaydi.LimanaVarisTarihi = dtpLimanaVarisTarihi.Value;
-            seyirKaydi.CikisLimani = cbCikisLimani.SelectedItem.ToString();
-            seyirKaydi.UgrayacagiLiman = cbUgradigiLiman.SelectedItem.ToString();
-            seyirKaydi.VarisLimani = cbVarisLimani.SelectedItem.ToString();
-
+            SeyirKaydi seyirKaydi = new SeyirKaydi()
+            {
+                Gemi = cbGemi.SelectedItem as Gemi,
+                LimandanCikisTarihi = dtpLimandanCikisTarihi.Value,
+                LimanaVarisTarihi = dtpLimanaVarisTarihi.Value,
+                CikisLimani = cbCikisLimani.SelectedItem.ToString(),
+                UgrayacagiLiman = cbUgradigiLiman.SelectedItem.ToString(),
+                VarisLimani = cbVarisLimani.SelectedItem.ToString()
+            };
+            SeyirKayitlari.Add(seyirKaydi); //static listemize seyir kaydýný ekliyoruz.
 
             ListViewItem listViewItem = new ListViewItem();
             listViewItem.Text = (id++).ToString(); //Her sefer oluþturulduðunda üstüne ekleyerek yazar. (id = 1 baþlangýç)
@@ -143,18 +147,33 @@ namespace SeyirDefteri.UI
             listViewItem.SubItems.Add(seyirKaydi.UgrayacagiLiman);
             listViewItem.SubItems.Add(seyirKaydi.VarisLimani);
 
-            lwSeferKaydi.Items.Add(listViewItem); 
+            lwSeferKaydi.Items.Add(listViewItem);
+
             Temizle();
         }
 
         private void Temizle()
         {
-            dtpLimandanCikisTarihi.Value = DateTime.Now; //Varsayýlan olarak bugünü ayarlar.
-            dtpLimanaVarisTarihi.Value = DateTime.Now;
-            cbGemi.SelectedIndex = -1;
+            //dtpLimandanCikisTarihi.Value = DateTime.Now; 
+            dtpLimandanCikisTarihi.Value = DateTime.Today; //Varsayýlan olarak bugünü ayarlar.
+            dtpLimanaVarisTarihi.Value = DateTime.Today;
+            cbGemi.SelectedIndex = -1; //(cbGemi.SelectedItem = null;)
             cbCikisLimani.SelectedIndex = -1;
             cbUgradigiLiman.SelectedIndex = -1;
             cbVarisLimani.SelectedIndex = -1;
+        }
+
+        private void btnGec_Click(object sender, EventArgs e)
+        {
+            if (SeyirKayitlari.Count > 0)
+            {
+                FRMGonderim fRMGonderim = new FRMGonderim(SeyirKayitlari);
+                fRMGonderim.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Lütfen seyirlerinizi listeye ekleyiniz.");
+            }
         }
     }
 }
