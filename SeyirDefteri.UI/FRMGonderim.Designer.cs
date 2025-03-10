@@ -40,7 +40,7 @@
             cbFirma = new ComboBox();
             txtKisiAdi = new TextBox();
             mtxtKisiTelefonNumarasi = new MaskedTextBox();
-            btnGonderimOlustur = new Button();
+            btnUrunEkle = new Button();
             lvGonderim = new ListView();
             ((System.ComponentModel.ISupportInitialize)nudTonaj).BeginInit();
             SuspendLayout();
@@ -48,16 +48,16 @@
             // cbSeyirKayitlari
             // 
             cbSeyirKayitlari.FormattingEnabled = true;
-            cbSeyirKayitlari.Location = new Point(238, 20);
+            cbSeyirKayitlari.Location = new Point(169, 23);
             cbSeyirKayitlari.Margin = new Padding(5, 4, 5, 4);
             cbSeyirKayitlari.Name = "cbSeyirKayitlari";
-            cbSeyirKayitlari.Size = new Size(653, 33);
+            cbSeyirKayitlari.Size = new Size(329, 33);
             cbSeyirKayitlari.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(106, 28);
+            label1.Location = new Point(52, 23);
             label1.Name = "label1";
             label1.Size = new Size(109, 25);
             label1.TabIndex = 1;
@@ -66,7 +66,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(137, 80);
+            label2.Location = new Point(52, 72);
             label2.Name = "label2";
             label2.Size = new Size(78, 25);
             label2.TabIndex = 1;
@@ -75,7 +75,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(133, 132);
+            label3.Location = new Point(52, 122);
             label3.Name = "label3";
             label3.Size = new Size(82, 25);
             label3.TabIndex = 1;
@@ -84,7 +84,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(129, 184);
+            label4.Location = new Point(52, 168);
             label4.Name = "label4";
             label4.Size = new Size(86, 25);
             label4.TabIndex = 1;
@@ -93,7 +93,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(151, 236);
+            label5.Location = new Point(52, 223);
             label5.Name = "label5";
             label5.Size = new Size(64, 25);
             label5.TabIndex = 1;
@@ -102,66 +102,66 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(59, 282);
+            label6.Location = new Point(52, 273);
             label6.Name = "label6";
-            label6.Size = new Size(156, 25);
+            label6.Size = new Size(100, 25);
             label6.TabIndex = 1;
-            label6.Text = "Kişi Telefonu :";
+            label6.Text = "Telefon :";
             // 
             // txtUrunAdi
             // 
-            txtUrunAdi.Location = new Point(238, 72);
+            txtUrunAdi.Location = new Point(169, 68);
             txtUrunAdi.Name = "txtUrunAdi";
-            txtUrunAdi.Size = new Size(653, 32);
+            txtUrunAdi.Size = new Size(329, 32);
             txtUrunAdi.TabIndex = 2;
             // 
             // nudTonaj
             // 
-            nudTonaj.Location = new Point(238, 123);
+            nudTonaj.Location = new Point(169, 118);
             nudTonaj.Maximum = new decimal(new int[] { 1661992959, 1808227885, 5, 0 });
             nudTonaj.Name = "nudTonaj";
-            nudTonaj.Size = new Size(653, 32);
+            nudTonaj.Size = new Size(329, 32);
             nudTonaj.TabIndex = 3;
             // 
             // cbFirma
             // 
             cbFirma.FormattingEnabled = true;
-            cbFirma.Location = new Point(238, 174);
+            cbFirma.Location = new Point(169, 168);
             cbFirma.Name = "cbFirma";
-            cbFirma.Size = new Size(653, 33);
+            cbFirma.Size = new Size(329, 33);
             cbFirma.TabIndex = 4;
             // 
             // txtKisiAdi
             // 
-            txtKisiAdi.Location = new Point(238, 229);
+            txtKisiAdi.Location = new Point(169, 223);
             txtKisiAdi.Name = "txtKisiAdi";
-            txtKisiAdi.Size = new Size(653, 32);
+            txtKisiAdi.Size = new Size(329, 32);
             txtKisiAdi.TabIndex = 5;
             // 
             // mtxtKisiTelefonNumarasi
             // 
-            mtxtKisiTelefonNumarasi.Location = new Point(238, 279);
+            mtxtKisiTelefonNumarasi.Location = new Point(169, 273);
             mtxtKisiTelefonNumarasi.Mask = "(999) 000-0000";
             mtxtKisiTelefonNumarasi.Name = "mtxtKisiTelefonNumarasi";
-            mtxtKisiTelefonNumarasi.Size = new Size(653, 32);
+            mtxtKisiTelefonNumarasi.Size = new Size(329, 32);
             mtxtKisiTelefonNumarasi.TabIndex = 6;
             // 
-            // btnGonderimOlustur
+            // btnUrunEkle
             // 
-            btnGonderimOlustur.BackColor = SystemColors.ActiveCaption;
-            btnGonderimOlustur.Location = new Point(952, 254);
-            btnGonderimOlustur.Name = "btnGonderimOlustur";
-            btnGonderimOlustur.Size = new Size(203, 57);
-            btnGonderimOlustur.TabIndex = 8;
-            btnGonderimOlustur.Text = "Oluştur";
-            btnGonderimOlustur.UseVisualStyleBackColor = false;
-            btnGonderimOlustur.Click += btnGonderimOlustur_Click;
+            btnUrunEkle.BackColor = SystemColors.GradientActiveCaption;
+            btnUrunEkle.Location = new Point(52, 327);
+            btnUrunEkle.Name = "btnUrunEkle";
+            btnUrunEkle.Size = new Size(454, 57);
+            btnUrunEkle.TabIndex = 8;
+            btnUrunEkle.Text = "Ürün Ekle";
+            btnUrunEkle.UseVisualStyleBackColor = false;
+            btnUrunEkle.Click += btnUrunEkle_Click;
             // 
             // lvGonderim
             // 
-            lvGonderim.Location = new Point(25, 350);
+            lvGonderim.Location = new Point(37, 400);
             lvGonderim.Name = "lvGonderim";
-            lvGonderim.Size = new Size(1130, 211);
+            lvGonderim.Size = new Size(1345, 229);
             lvGonderim.TabIndex = 9;
             lvGonderim.UseCompatibleStateImageBehavior = false;
             // 
@@ -169,9 +169,9 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1218, 603);
+            ClientSize = new Size(1474, 708);
             Controls.Add(lvGonderim);
-            Controls.Add(btnGonderimOlustur);
+            Controls.Add(btnUrunEkle);
             Controls.Add(mtxtKisiTelefonNumarasi);
             Controls.Add(txtKisiAdi);
             Controls.Add(cbFirma);
@@ -208,7 +208,7 @@
         private ComboBox cbFirma;
         private TextBox txtKisiAdi;
         private MaskedTextBox mtxtKisiTelefonNumarasi;
-        private Button btnGonderimOlustur;
+        private Button btnUrunEkle;
         private ListView lvGonderim;
     }
 }

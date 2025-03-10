@@ -42,13 +42,13 @@
             cbVarisLimani = new ComboBox();
             btnSeferOlustur = new Button();
             btnGec = new Button();
-            lwSeferKaydi = new ListView();
+            lvSeferler = new ListView();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(70, 38);
+            label1.Location = new Point(56, 37);
             label1.Name = "label1";
             label1.Size = new Size(258, 25);
             label1.TabIndex = 0;
@@ -57,7 +57,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(100, 88);
+            label2.Location = new Point(66, 87);
             label2.Name = "label2";
             label2.Size = new Size(221, 25);
             label2.TabIndex = 1;
@@ -66,7 +66,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(240, 134);
+            label3.Location = new Point(66, 133);
             label3.Name = "label3";
             label3.Size = new Size(81, 25);
             label3.TabIndex = 0;
@@ -75,7 +75,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(171, 184);
+            label4.Location = new Point(66, 183);
             label4.Name = "label4";
             label4.Size = new Size(150, 25);
             label4.TabIndex = 1;
@@ -84,7 +84,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(141, 238);
+            label5.Location = new Point(66, 237);
             label5.Name = "label5";
             label5.Size = new Size(180, 25);
             label5.TabIndex = 0;
@@ -93,7 +93,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(169, 288);
+            label6.Location = new Point(66, 287);
             label6.Name = "label6";
             label6.Size = new Size(152, 25);
             label6.TabIndex = 1;
@@ -101,56 +101,56 @@
             // 
             // dtpLimandanCikisTarihi
             // 
-            dtpLimandanCikisTarihi.Location = new Point(345, 31);
+            dtpLimandanCikisTarihi.Location = new Point(304, 34);
             dtpLimandanCikisTarihi.Name = "dtpLimandanCikisTarihi";
-            dtpLimandanCikisTarihi.Size = new Size(349, 32);
+            dtpLimandanCikisTarihi.Size = new Size(360, 32);
             dtpLimandanCikisTarihi.TabIndex = 2;
             // 
             // dtpLimanaVarisTarihi
             // 
-            dtpLimanaVarisTarihi.Location = new Point(345, 81);
+            dtpLimanaVarisTarihi.Location = new Point(304, 84);
             dtpLimanaVarisTarihi.Name = "dtpLimanaVarisTarihi";
-            dtpLimanaVarisTarihi.Size = new Size(349, 32);
+            dtpLimanaVarisTarihi.Size = new Size(360, 32);
             dtpLimanaVarisTarihi.TabIndex = 2;
             // 
             // cbGemi
             // 
             cbGemi.FormattingEnabled = true;
-            cbGemi.Location = new Point(345, 133);
+            cbGemi.Location = new Point(304, 133);
             cbGemi.Name = "cbGemi";
-            cbGemi.Size = new Size(417, 33);
+            cbGemi.Size = new Size(360, 33);
             cbGemi.TabIndex = 3;
             // 
             // cbCikisLimani
             // 
             cbCikisLimani.FormattingEnabled = true;
-            cbCikisLimani.Location = new Point(345, 180);
+            cbCikisLimani.Location = new Point(304, 180);
             cbCikisLimani.Name = "cbCikisLimani";
-            cbCikisLimani.Size = new Size(417, 33);
+            cbCikisLimani.Size = new Size(360, 33);
             cbCikisLimani.TabIndex = 3;
             // 
             // cbUgradigiLiman
             // 
             cbUgradigiLiman.FormattingEnabled = true;
-            cbUgradigiLiman.Location = new Point(345, 234);
+            cbUgradigiLiman.Location = new Point(304, 234);
             cbUgradigiLiman.Name = "cbUgradigiLiman";
-            cbUgradigiLiman.Size = new Size(417, 33);
+            cbUgradigiLiman.Size = new Size(360, 33);
             cbUgradigiLiman.TabIndex = 3;
             // 
             // cbVarisLimani
             // 
             cbVarisLimani.FormattingEnabled = true;
-            cbVarisLimani.Location = new Point(345, 281);
+            cbVarisLimani.Location = new Point(304, 281);
             cbVarisLimani.Name = "cbVarisLimani";
-            cbVarisLimani.Size = new Size(417, 33);
+            cbVarisLimani.Size = new Size(360, 33);
             cbVarisLimani.TabIndex = 3;
             // 
             // btnSeferOlustur
             // 
             btnSeferOlustur.BackColor = SystemColors.GradientActiveCaption;
-            btnSeferOlustur.Location = new Point(814, 253);
+            btnSeferOlustur.Location = new Point(66, 334);
             btnSeferOlustur.Name = "btnSeferOlustur";
-            btnSeferOlustur.Size = new Size(294, 60);
+            btnSeferOlustur.Size = new Size(598, 60);
             btnSeferOlustur.TabIndex = 4;
             btnSeferOlustur.Text = "Sefer Oluştur";
             btnSeferOlustur.UseVisualStyleBackColor = false;
@@ -159,21 +159,21 @@
             // btnGec
             // 
             btnGec.BackColor = SystemColors.GradientActiveCaption;
-            btnGec.Location = new Point(45, 617);
+            btnGec.Location = new Point(1330, 680);
             btnGec.Name = "btnGec";
-            btnGec.Size = new Size(1548, 56);
+            btnGec.Size = new Size(303, 56);
             btnGec.TabIndex = 6;
             btnGec.Text = ">>>";
             btnGec.UseVisualStyleBackColor = false;
             btnGec.Click += btnGec_Click;
             // 
-            // lwSeferKaydi
+            // lvSeferler
             // 
-            lwSeferKaydi.Location = new Point(45, 337);
-            lwSeferKaydi.Name = "lwSeferKaydi";
-            lwSeferKaydi.Size = new Size(1548, 274);
-            lwSeferKaydi.TabIndex = 7;
-            lwSeferKaydi.UseCompatibleStateImageBehavior = false;
+            lvSeferler.Location = new Point(56, 400);
+            lvSeferler.Name = "lvSeferler";
+            lvSeferler.Size = new Size(1577, 274);
+            lvSeferler.TabIndex = 7;
+            lvSeferler.UseCompatibleStateImageBehavior = false;
             // 
             // FRMSeyirEkrani
             // 
@@ -181,7 +181,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(1669, 765);
-            Controls.Add(lwSeferKaydi);
+            Controls.Add(lvSeferler);
             Controls.Add(btnGec);
             Controls.Add(btnSeferOlustur);
             Controls.Add(cbVarisLimani);
@@ -221,6 +221,6 @@
         private ComboBox cbVarisLimani;
         private Button btnSeferOlustur;
         private Button btnGec;
-        private ListView lwSeferKaydi;
+        private ListView lvSeferler;
     }
 }

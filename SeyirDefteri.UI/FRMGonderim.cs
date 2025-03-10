@@ -17,11 +17,12 @@ namespace SeyirDefteri.UI
         {
             InitializeComponent();
         }
+
         public FRMGonderim(List<SeyirKaydi> seyirKayitlari) : this()
         {
             foreach (SeyirKaydi seyirKaydi in seyirKayitlari)
             {
-                if (seyirKaydi.Gemi == null)
+                if (seyirKaydi.Gemi == null)  //Bu forma geçme şartı gönderilen verilerdeki listenin eleman sayısının 0 dan büyük olmasıydı. Listeye eklenen seyirkaydınında eklenmesi için geminin seçilmiş olması gerekiyordu. Neden bunu kontrol ediyoruz? 
                 {
                     MessageBox.Show("Sefer kayıtlarındaki gemi bilgisi eksik");
                     return;
@@ -30,15 +31,60 @@ namespace SeyirDefteri.UI
             }
         }
 
-        private void FRMGonderim_Load(object sender, EventArgs e)
+        private void FirmalariOlustur()
         {
-            FirmalariOlustur();
-            ListViewOlustur();
+            List<Firma> firmalar = new List<Firma>
+        {
+            new Firma{FirmaId=1, FirmaAdi="Amazon"},
+            new Firma{FirmaId=2, FirmaAdi="Etsy"},
+            new Firma{FirmaId=3, FirmaAdi="Ebay"},
+            new Firma{FirmaId=4, FirmaAdi="Wish"},
+            new Firma{FirmaId=5, FirmaAdi="Alibaba"},
+            new Firma{FirmaId=6, FirmaAdi="Banggood"},
+            new Firma{FirmaId=7, FirmaAdi="n11"},
+            new Firma{FirmaId=8, FirmaAdi="Trendyol"},
+            new Firma{FirmaId=9, FirmaAdi="ÇiçekSepeti"},
+            new Firma{FirmaId=10, FirmaAdi="Bonanza"},
+            new Firma{FirmaId=11, FirmaAdi="ModCloth"},
+            new Firma{FirmaId=12, FirmaAdi="Wayfair"},
+            new Firma{FirmaId=13, FirmaAdi="Runway"},
+            new Firma{FirmaId=14, FirmaAdi="Shein"},
+            new Firma{FirmaId=15, FirmaAdi="Farfetch"},
+            new Firma{FirmaId=16, FirmaAdi="Macy's"},
+            new Firma{FirmaId=17, FirmaAdi="LightInTheBox"},
+            new Firma{FirmaId=18, FirmaAdi="Shein"},
+            new Firma{FirmaId=19, FirmaAdi="ASOS"},
+            new Firma{FirmaId=20, FirmaAdi="Zalando"},
+        };
+
+            foreach (Firma firma in firmalar)
+            {
+                cbFirma.Items.Add(firma); //firmalar listemin içindeki Firma tipindeki firmalar comboboxa eklendi.
+            }
         }
 
-        int id = 0, urunId = 1, ilgilenenKisiId = 0;
-        private Gemi seciliGemi;
-        private void btnGonderimOlustur_Click(object sender, EventArgs e)
+        private void ListViewTabloOlustur()
+        {
+            lvGonderim.View = View.Details;
+            lvGonderim.GridLines = true;
+
+            lvGonderim.Columns.Add("ID", 50);
+            lvGonderim.Columns.Add("Ürün", 150, HorizontalAlignment.Center);
+            lvGonderim.Columns.Add("Kişi ", 150, HorizontalAlignment.Center);
+            lvGonderim.Columns.Add("Telefon", 150, HorizontalAlignment.Center);
+            lvGonderim.Columns.Add("Firma", 150, HorizontalAlignment.Center);
+            lvGonderim.Columns.Add("Tonaj", 150, HorizontalAlignment.Center);
+        }
+
+        private void FRMGonderim_Load(object sender, EventArgs e)
+        {
+            //Form yüklenirken
+            FirmalariOlustur();
+            ListViewTabloOlustur();
+        }
+
+       
+        private void btnUrunEkle_Click(object sender, EventArgs e)
         {
             Gonderim gonderim = new Gonderim();
             gonderim.Urun.UrunAdi = txtUrunAdi.Text;
@@ -47,28 +93,6 @@ namespace SeyirDefteri.UI
             gonderim.IlgilenenKisi.BagliOlduguFirma = cbFirma.SelectedItem as Firma;
             gonderim.SeyirKaydi = cbSeyirKayitlari.SelectedItem as SeyirKaydi;
             gonderim.Tonaj = nudTonaj.Value;
-
-        }
-        private void FirmalariOlustur()
-        {
-            List<Firma> firmalar = new List<Firma>
-        {
-            new Firma{FirmaId=1, FirmaAdi="Amazon"},
-            new Firma{FirmaId=2, FirmaAdi="Ebay"},
-            new Firma{FirmaId=3, FirmaAdi="Wish"},
-            new Firma{FirmaId=4, FirmaAdi="Alibaba"},
-            new Firma{FirmaId=5, FirmaAdi="Banggood"},
-            new Firma{FirmaId=6, FirmaAdi="n11"},
-            new Firma{FirmaId=7, FirmaAdi="Trendyol"},
-            new Firma{FirmaId=8, FirmaAdi="ÇiçekSepeti"},
-            new Firma{FirmaId=9, FirmaAdi="Etsy"},
-
-            };
-
-            foreach (Firma firma in firmalar)
-            {
-                cbFirma.Items.Add(firma);
-            }
         }
 
         private void Temizle()
@@ -79,17 +103,6 @@ namespace SeyirDefteri.UI
             nudTonaj.Value = 0;
         }
 
-        private void ListViewOlustur()
-        {
-            lvGonderim.View = View.Details;
-            lvGonderim.GridLines = true;
-            lvGonderim.Columns.Add("ID", 50);
-            lvGonderim.Columns.Add("Ürün", 150);
-            lvGonderim.Columns.Add("Kişi ", 150);
-            lvGonderim.Columns.Add("Telefon", 150);
-            lvGonderim.Columns.Add("Firma", 150);
-            lvGonderim.Columns.Add("Tonaj", 150);
-        }
 
 
 

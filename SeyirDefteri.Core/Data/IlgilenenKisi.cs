@@ -12,5 +12,10 @@ namespace SeyirDefteri.Core.Data
         public string KisininAdi { get; set; }
         public string KisininTelefonu { get; set; }
         public Firma BagliOlduguFirma { get; set; }
+
+        public override string ToString()
+        {
+            return KisininAdi;
+        }
     }
 }
