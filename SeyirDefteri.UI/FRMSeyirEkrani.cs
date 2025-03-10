@@ -11,7 +11,7 @@ namespace SeyirDefteri.UI
 
         private void GemileriOlustur()
         {
-            List<Gemi> gemiler = new List<Gemi>()
+            List<Gemi> gemiler = new List<Gemi>
             {
                 new Gemi { GemiId = 1, GemiAdi = "Titanic", Tonaji = 46000m },
         new Gemi { GemiId = 2, GemiAdi = "Queen Mary 2", Tonaji = 148528m },
@@ -32,7 +32,7 @@ namespace SeyirDefteri.UI
 
             foreach (var gemi in gemiler)
             {
-                cbGemi.Items.Add(gemi);
+                cbGemi.Items.Add(gemi);   //Gemiler listesindeki gemileri comboboxa ekler.
             }
         }
 
@@ -76,11 +76,11 @@ namespace SeyirDefteri.UI
 
             foreach (var liman in limanlar)
             {
+                //limanlar listesindeki limanlarý comboboxlara ekler.
                 cbCikisLimani.Items.Add(liman);
                 cbUgradigiLiman.Items.Add(liman);
                 cbVarisLimani.Items.Add(liman);
             }
-
         }
 
         private void ListViewOlustur()
@@ -88,15 +88,15 @@ namespace SeyirDefteri.UI
             lwSeferKaydi.View = View.Details;  //Detaylý görünüm için
             lwSeferKaydi.GridLines = true;    //Çizgiler için
 
+            //Baþlýklar ekleniyor
             lwSeferKaydi.Columns.Add("Id", 40);
-            lwSeferKaydi.Columns.Add("Gemi", 200, HorizontalAlignment.Center);
+            lwSeferKaydi.Columns.Add("Gemi", 200, HorizontalAlignment.Center);  //Ortalý durmasý için 
             lwSeferKaydi.Columns.Add("Çýkýþ Tarihi", 140, HorizontalAlignment.Center);
             lwSeferKaydi.Columns.Add("Varýþ Tarihi", 140, HorizontalAlignment.Center);
             lwSeferKaydi.Columns.Add("Çýkýþ Limaný", 225, HorizontalAlignment.Center);
             lwSeferKaydi.Columns.Add("Uðradýðý Liman", 225, HorizontalAlignment.Center);
             lwSeferKaydi.Columns.Add("Varýþ Limaný", 225, HorizontalAlignment.Center);
         }
-
 
         private void FRMSeyirEkrani_Load(object sender, EventArgs e)
         {
@@ -106,22 +106,22 @@ namespace SeyirDefteri.UI
             dtpLimandanCikisTarihi.Select();
         }
 
-        int ýd = 1;
+        int id = 1;
         private void btnSeferOlustur_Click(object sender, EventArgs e)
         {
-            if (dtpLimandanCikisTarihi.Value.Date > dtpLimanaVarisTarihi.Value.Date)
+            if (dtpLimandanCikisTarihi.Value.Date > dtpLimanaVarisTarihi.Value.Date) //Tarih kontrolü
             {
                 MessageBox.Show("Geminin limana varýþ tarihi, limandan çýkýþ tarihinden erken olamaz!");
                 return;
             }
-            if (cbGemi.SelectedItem == null || cbCikisLimani.SelectedItem == null || cbUgradigiLiman.SelectedItem == null || cbVarisLimani.SelectedItem == null)
+            if (cbGemi.SelectedItem == null || cbCikisLimani.SelectedItem == null || cbUgradigiLiman.SelectedItem == null || cbVarisLimani.SelectedItem == null)  //Combobox seçili olma kontrolü
             {
-                MessageBox.Show("Gemi alaný, çýkýþ limaný, uðradýðý liman ve varýþ liman alanlarý boþ geçilemez!");
+                MessageBox.Show("Gemi alaný, çýkýþ limaný, uðradýðý liman ve varýþ liman alanlarý seçilmelidir!");
                 return;
             }
-            if (cbCikisLimani.SelectedItem == cbVarisLimani.SelectedItem || cbCikisLimani.SelectedItem == cbUgradigiLiman.SelectedItem || cbUgradigiLiman.SelectedItem == cbVarisLimani.SelectedItem)
+            if (cbCikisLimani.SelectedItem == cbVarisLimani.SelectedItem || cbCikisLimani.SelectedItem == cbUgradigiLiman.SelectedItem || cbUgradigiLiman.SelectedItem == cbVarisLimani.SelectedItem)  //Limanlarýn eþit olma durum kontrolü
             {
-                MessageBox.Show("Çýkýþ limaný, uðradýðý liman veya varýþ limanlarý ayný olamaz!");
+                MessageBox.Show("Sefer sýrasýnda girilen duraklar farklý olmak zorundadýr!");
                 return;
             }
 
@@ -135,7 +135,7 @@ namespace SeyirDefteri.UI
 
 
             ListViewItem listViewItem = new ListViewItem();
-            listViewItem.Text = (ýd++).ToString();
+            listViewItem.Text = (id++).ToString(); //Her sefer oluþturulduðunda üstüne ekleyerek yazar. (id = 1 baþlangýç)
             listViewItem.SubItems.Add(seyirKaydi.Gemi.ToString());
             listViewItem.SubItems.Add(seyirKaydi.LimandanCikisTarihi.ToShortDateString());
             listViewItem.SubItems.Add(seyirKaydi.LimanaVarisTarihi.ToShortDateString());
@@ -143,7 +143,7 @@ namespace SeyirDefteri.UI
             listViewItem.SubItems.Add(seyirKaydi.UgrayacagiLiman);
             listViewItem.SubItems.Add(seyirKaydi.VarisLimani);
 
-            lwSeferKaydi.Items.Add(listViewItem);
+            lwSeferKaydi.Items.Add(listViewItem); 
             Temizle();
         }
 
