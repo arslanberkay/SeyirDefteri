@@ -49,16 +49,16 @@
             // cbSeyirKayitlari
             // 
             cbSeyirKayitlari.FormattingEnabled = true;
-            cbSeyirKayitlari.Location = new Point(169, 23);
+            cbSeyirKayitlari.Location = new Point(172, 25);
             cbSeyirKayitlari.Margin = new Padding(5, 4, 5, 4);
             cbSeyirKayitlari.Name = "cbSeyirKayitlari";
-            cbSeyirKayitlari.Size = new Size(329, 33);
+            cbSeyirKayitlari.Size = new Size(351, 33);
             cbSeyirKayitlari.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(52, 23);
+            label1.Location = new Point(55, 25);
             label1.Name = "label1";
             label1.Size = new Size(109, 25);
             label1.TabIndex = 1;
@@ -67,7 +67,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(52, 72);
+            label2.Location = new Point(55, 74);
             label2.Name = "label2";
             label2.Size = new Size(78, 25);
             label2.TabIndex = 1;
@@ -76,7 +76,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(52, 122);
+            label3.Location = new Point(55, 124);
             label3.Name = "label3";
             label3.Size = new Size(82, 25);
             label3.TabIndex = 1;
@@ -85,7 +85,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(52, 168);
+            label4.Location = new Point(55, 170);
             label4.Name = "label4";
             label4.Size = new Size(86, 25);
             label4.TabIndex = 1;
@@ -94,7 +94,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(52, 223);
+            label5.Location = new Point(55, 225);
             label5.Name = "label5";
             label5.Size = new Size(64, 25);
             label5.TabIndex = 1;
@@ -103,7 +103,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(52, 273);
+            label6.Location = new Point(55, 275);
             label6.Name = "label6";
             label6.Size = new Size(100, 25);
             label6.TabIndex = 1;
@@ -111,48 +111,48 @@
             // 
             // txtUrunAdi
             // 
-            txtUrunAdi.Location = new Point(169, 68);
+            txtUrunAdi.Location = new Point(172, 70);
             txtUrunAdi.Name = "txtUrunAdi";
-            txtUrunAdi.Size = new Size(329, 32);
+            txtUrunAdi.Size = new Size(351, 32);
             txtUrunAdi.TabIndex = 2;
             // 
             // nudTonaj
             // 
-            nudTonaj.Location = new Point(169, 118);
+            nudTonaj.Location = new Point(172, 120);
             nudTonaj.Maximum = new decimal(new int[] { 1661992959, 1808227885, 5, 0 });
             nudTonaj.Name = "nudTonaj";
-            nudTonaj.Size = new Size(329, 32);
+            nudTonaj.Size = new Size(351, 32);
             nudTonaj.TabIndex = 3;
             // 
             // cbFirma
             // 
             cbFirma.FormattingEnabled = true;
-            cbFirma.Location = new Point(169, 168);
+            cbFirma.Location = new Point(172, 170);
             cbFirma.Name = "cbFirma";
-            cbFirma.Size = new Size(329, 33);
+            cbFirma.Size = new Size(351, 33);
             cbFirma.TabIndex = 4;
             // 
             // txtKisiAdi
             // 
-            txtKisiAdi.Location = new Point(169, 223);
+            txtKisiAdi.Location = new Point(172, 225);
             txtKisiAdi.Name = "txtKisiAdi";
-            txtKisiAdi.Size = new Size(329, 32);
+            txtKisiAdi.Size = new Size(351, 32);
             txtKisiAdi.TabIndex = 5;
             // 
             // mtxtKisiTelefonNumarasi
             // 
-            mtxtKisiTelefonNumarasi.Location = new Point(169, 273);
+            mtxtKisiTelefonNumarasi.Location = new Point(172, 275);
             mtxtKisiTelefonNumarasi.Mask = "(999) 000-0000";
             mtxtKisiTelefonNumarasi.Name = "mtxtKisiTelefonNumarasi";
-            mtxtKisiTelefonNumarasi.Size = new Size(329, 32);
+            mtxtKisiTelefonNumarasi.Size = new Size(351, 32);
             mtxtKisiTelefonNumarasi.TabIndex = 6;
             // 
             // btnUrunEkle
             // 
             btnUrunEkle.BackColor = SystemColors.GradientActiveCaption;
-            btnUrunEkle.Location = new Point(52, 327);
+            btnUrunEkle.Location = new Point(55, 322);
             btnUrunEkle.Name = "btnUrunEkle";
-            btnUrunEkle.Size = new Size(454, 57);
+            btnUrunEkle.Size = new Size(476, 74);
             btnUrunEkle.TabIndex = 8;
             btnUrunEkle.Text = "Ürün Ekle";
             btnUrunEkle.UseVisualStyleBackColor = false;
@@ -160,7 +160,7 @@
             // 
             // lvGonderim
             // 
-            lvGonderim.Location = new Point(37, 400);
+            lvGonderim.Location = new Point(40, 402);
             lvGonderim.Name = "lvGonderim";
             lvGonderim.Size = new Size(1345, 229);
             lvGonderim.TabIndex = 9;
@@ -169,7 +169,7 @@
             // btnGec
             // 
             btnGec.BackColor = SystemColors.GradientActiveCaption;
-            btnGec.Location = new Point(1097, 635);
+            btnGec.Location = new Point(1100, 637);
             btnGec.Name = "btnGec";
             btnGec.Size = new Size(285, 57);
             btnGec.TabIndex = 8;
@@ -181,7 +181,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1447, 713);
+            ClientSize = new Size(1424, 713);
             Controls.Add(lvGonderim);
             Controls.Add(btnGec);
             Controls.Add(btnUrunEkle);

@@ -54,7 +54,7 @@ namespace SeyirDefteri.UI
 
             foreach (Firma firma in firmalar)
             {
-                cbFirma.Items.Add(firma); //firmalar listemin içindeki Firma tipindeki firmalar comboboxa eklendi.
+                cbFirma.Items.Add(firma); //firmalar listemin içindeki Firma tipindeki firma comboboxa eklendi.
             }
         }
 
@@ -114,11 +114,11 @@ namespace SeyirDefteri.UI
             gonderim.SeyirKaydi = seyirKaydi;
 
             gonderim.Urun = new Urun();
-            gonderim.Urun.UrunId = urunId++;
+            gonderim.Urun.UrunId = urunId++; //Idyi nerde kullandık ve neden 1 başladı
             gonderim.Urun.UrunAdi = txtUrunAdi.Text;
 
             gonderim.IlgilenenKisi = new IlgilenenKisi();
-            gonderim.IlgilenenKisi.IlgilenenKisiId = ilgilenenKisiId++;
+            gonderim.IlgilenenKisi.IlgilenenKisiId = ilgilenenKisiId++;  // Nerde kullandık ve neden 0 başladı
             gonderim.IlgilenenKisi.KisininAdi = txtKisiAdi.Text;
             gonderim.IlgilenenKisi.KisininTelefonu = mtxtKisiTelefonNumarasi.Text;
             gonderim.IlgilenenKisi.BagliOlduguFirma = cbFirma.SelectedItem as Firma;
@@ -133,9 +133,9 @@ namespace SeyirDefteri.UI
             listViewItem.SubItems.Add(gonderim.IlgilenenKisi.KisininAdi);
             listViewItem.SubItems.Add(gonderim.IlgilenenKisi.KisininTelefonu);
 
-            listViewItem.Tag = gonderim; //Burada her bir list itemının tag kontrolüne gönderim nesnesini gizledim
+            listViewItem.Tag = gonderim; //Burada her bir listviewitemının tag kontrolüne gönderim nesnesini gizledim
 
-            lvGonderim.Items.Add(listViewItem); //Burada list itemlarını listview içerisine ekleme yaptım.
+            lvGonderim.Items.Add(listViewItem); //Burada listviewitemlarını listview içerisine ekleme yaptım.
             Temizle();
         }
 
@@ -151,15 +151,18 @@ namespace SeyirDefteri.UI
         {
             if (lvGonderim.Items.Count > 0)
             {
-                List<Gonderim> gonderimler = new List<Gonderim>();  //Bir gönderim listesi oluşturdum.
+                List<Gonderim> gonderimler = new List<Gonderim>();  //Bir gönderimler listesi oluşturdum.
 
-                foreach (ListViewItem item in lvGonderim.Items) // Burada daha önce eklediğim list itemlarını listview içinde dönerek her list itemin tagine ulaştım orada gönderim nesnesi vardı bende bunları bir gönderim kistesine ekledim
+                foreach (ListViewItem listViewItem in lvGonderim.Items) // Burada daha önce eklediğim listviewitemlarını listview içinde dönerek her listviewitemin tagine ulaştım orada gönderim nesnesi vardı bende bunları bir gönderimler listesine ekledim
                 {
-                    gonderimler.Add((Gonderim)item.Tag);
+                    gonderimler.Add((Gonderim)listViewItem.Tag);
                 }
                 FRMZRaporu fRMZRaporu = new FRMZRaporu(gonderimler); //Eklediğim gönderim listesini Form3 te çağırdım.
                 fRMZRaporu.ShowDialog();
-
+            }
+            else
+            {
+                MessageBox.Show("Lütfen ürün ekleyiniz!");
             }
         }
     }
