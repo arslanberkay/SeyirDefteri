@@ -10,7 +10,7 @@ namespace SeyirDefteri.Core.Data
     {
         public int GonderimId { get; set; }
         public Urun Urun { get; set; }
-        public IlgilenenKisi IlgilenenKisi { get; set; }
+        public IlgilenenKisi IlgilenenKisi { get; set; } 
         public SeyirKaydi SeyirKaydi { get; set; }
         public decimal Tonaj { get; set; }
 

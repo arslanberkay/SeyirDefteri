@@ -8,7 +8,7 @@ namespace SeyirDefteri.Core.Data
 {
     public class Urun
     {
-        public string UrunId { get; set; }
+        public int UrunId { get; set; }
         public string UrunAdi { get; set; }
 
         public override string ToString()

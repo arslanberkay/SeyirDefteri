@@ -83,16 +83,55 @@ namespace SeyirDefteri.UI
             ListViewTabloOlustur();
         }
 
-       
+        int id = 0, urunId = 1, ilgilenenKisiId = 0;
         private void btnUrunEkle_Click(object sender, EventArgs e)
         {
+            if (cbSeyirKayitlari.SelectedItem == null)
+            {
+                MessageBox.Show("Lütfen sefer seçiniz!");
+                return;
+            }
+            if (cbFirma.SelectedItem == null)
+            {
+                MessageBox.Show("Lütfen firma seçiniz!");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtUrunAdi.Text))
+            {
+                MessageBox.Show("Ürün adı boş olamaz!");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtKisiAdi.Text) || string.IsNullOrWhiteSpace(mtxtKisiTelefonNumarasi.Text))
+            {
+                MessageBox.Show("Kişi adı veya telefon numarası boş olamaz!");
+                return;
+            }
+
+            SeyirKaydi seyirKaydi = cbSeyirKayitlari.SelectedItem as SeyirKaydi;
+
+            if (nudTonaj.Value > seyirKaydi.Gemi.Tonaji)
+            {
+                MessageBox.Show("Geminin tonajından büyük bir değer girilemez!");
+                return;
+            }
+
             Gonderim gonderim = new Gonderim();
+            gonderim.SeyirKaydi = seyirKaydi;
+
+            gonderim.Urun = new Urun();
+            gonderim.Urun.UrunId = urunId++;
             gonderim.Urun.UrunAdi = txtUrunAdi.Text;
+
+            gonderim.IlgilenenKisi = new IlgilenenKisi();
+            gonderim.IlgilenenKisi.IlgilenenKisiId = ilgilenenKisiId++;
             gonderim.IlgilenenKisi.KisininAdi = txtKisiAdi.Text;
             gonderim.IlgilenenKisi.KisininTelefonu = mtxtKisiTelefonNumarasi.Text;
             gonderim.IlgilenenKisi.BagliOlduguFirma = cbFirma.SelectedItem as Firma;
-            gonderim.SeyirKaydi = cbSeyirKayitlari.SelectedItem as SeyirKaydi;
+
             gonderim.Tonaj = nudTonaj.Value;
+
+
+
         }
 
         private void Temizle()
