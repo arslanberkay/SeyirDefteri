@@ -22,11 +22,6 @@ namespace SeyirDefteri.UI
         {
             foreach (SeyirKaydi seyirKaydi in seyirKayitlari)
             {
-                if (seyirKaydi.Gemi == null)  //Bu forma geçme şartı gönderilen verilerdeki listenin eleman sayısının 0 dan büyük olmasıydı. Listeye eklenen seyirkaydınında eklenmesi için geminin seçilmiş olması gerekiyordu. Neden bunu kontrol ediyoruz? 
-                {
-                    MessageBox.Show("Sefer kayıtlarındaki gemi bilgisi eksik");
-                    return;
-                }
                 cbSeyirKayitlari.Items.Add(seyirKaydi);
             }
         }
@@ -69,11 +64,11 @@ namespace SeyirDefteri.UI
             lvGonderim.GridLines = true;
 
             lvGonderim.Columns.Add("ID", 50);
+            lvGonderim.Columns.Add("Tonaj", 150, HorizontalAlignment.Center);
             lvGonderim.Columns.Add("Ürün", 150, HorizontalAlignment.Center);
+            lvGonderim.Columns.Add("Firma", 150, HorizontalAlignment.Center);
             lvGonderim.Columns.Add("Kişi ", 150, HorizontalAlignment.Center);
             lvGonderim.Columns.Add("Telefon", 150, HorizontalAlignment.Center);
-            lvGonderim.Columns.Add("Firma", 150, HorizontalAlignment.Center);
-            lvGonderim.Columns.Add("Tonaj", 150, HorizontalAlignment.Center);
         }
 
         private void FRMGonderim_Load(object sender, EventArgs e)
@@ -130,8 +125,18 @@ namespace SeyirDefteri.UI
 
             gonderim.Tonaj = nudTonaj.Value;
 
+            ListViewItem listViewItem = new ListViewItem();
+            listViewItem.Text = (++id).ToString();
+            listViewItem.SubItems.Add(gonderim.Tonaj.ToString());
+            listViewItem.SubItems.Add(gonderim.Urun.UrunAdi);
+            listViewItem.SubItems.Add(gonderim.IlgilenenKisi.BagliOlduguFirma.FirmaAdi);
+            listViewItem.SubItems.Add(gonderim.IlgilenenKisi.KisininAdi);
+            listViewItem.SubItems.Add(gonderim.IlgilenenKisi.KisininTelefonu);
 
+            listViewItem.Tag = gonderim; //Burada her bir list itemının tag kontrolüne gönderim nesnesini gizledim
 
+            lvGonderim.Items.Add(listViewItem); //Burada list itemlarını listview içerisine ekleme yaptım.
+            Temizle();
         }
 
         private void Temizle()
@@ -142,8 +147,20 @@ namespace SeyirDefteri.UI
             nudTonaj.Value = 0;
         }
 
+        private void btnGec_Click(object sender, EventArgs e)
+        {
+            if (lvGonderim.Items.Count > 0)
+            {
+                List<Gonderim> gonderimler = new List<Gonderim>();  //Bir gönderim listesi oluşturdum.
 
+                foreach (ListViewItem item in lvGonderim.Items) // Burada daha önce eklediğim list itemlarını listview içinde dönerek her list itemin tagine ulaştım orada gönderim nesnesi vardı bende bunları bir gönderim kistesine ekledim
+                {
+                    gonderimler.Add((Gonderim)item.Tag);
+                }
+                FRMZRaporu fRMZRaporu = new FRMZRaporu(gonderimler); //Eklediğim gönderim listesini Form3 te çağırdım.
+                fRMZRaporu.ShowDialog();
 
-
+            }
+        }
     }
 }

@@ -42,6 +42,7 @@
             mtxtKisiTelefonNumarasi = new MaskedTextBox();
             btnUrunEkle = new Button();
             lvGonderim = new ListView();
+            btnGec = new Button();
             ((System.ComponentModel.ISupportInitialize)nudTonaj).BeginInit();
             SuspendLayout();
             // 
@@ -165,12 +166,24 @@
             lvGonderim.TabIndex = 9;
             lvGonderim.UseCompatibleStateImageBehavior = false;
             // 
+            // btnGec
+            // 
+            btnGec.BackColor = SystemColors.GradientActiveCaption;
+            btnGec.Location = new Point(1097, 635);
+            btnGec.Name = "btnGec";
+            btnGec.Size = new Size(285, 57);
+            btnGec.TabIndex = 8;
+            btnGec.Text = ">>>";
+            btnGec.UseVisualStyleBackColor = false;
+            btnGec.Click += btnGec_Click;
+            // 
             // FRMGonderim
             // 
             AutoScaleDimensions = new SizeF(13F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1474, 708);
+            ClientSize = new Size(1447, 713);
             Controls.Add(lvGonderim);
+            Controls.Add(btnGec);
             Controls.Add(btnUrunEkle);
             Controls.Add(mtxtKisiTelefonNumarasi);
             Controls.Add(txtKisiAdi);
@@ -210,5 +223,6 @@
         private MaskedTextBox mtxtKisiTelefonNumarasi;
         private Button btnUrunEkle;
         private ListView lvGonderim;
+        private Button btnGec;
     }
 }
