@@ -162,14 +162,14 @@
             // 
             lvGonderim.Location = new Point(40, 402);
             lvGonderim.Name = "lvGonderim";
-            lvGonderim.Size = new Size(1345, 229);
+            lvGonderim.Size = new Size(1148, 229);
             lvGonderim.TabIndex = 9;
             lvGonderim.UseCompatibleStateImageBehavior = false;
             // 
             // btnGec
             // 
             btnGec.BackColor = SystemColors.GradientActiveCaption;
-            btnGec.Location = new Point(1100, 637);
+            btnGec.Location = new Point(903, 637);
             btnGec.Name = "btnGec";
             btnGec.Size = new Size(285, 57);
             btnGec.TabIndex = 8;
@@ -181,7 +181,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1424, 713);
+            ClientSize = new Size(1223, 713);
             Controls.Add(lvGonderim);
             Controls.Add(btnGec);
             Controls.Add(btnUrunEkle);
