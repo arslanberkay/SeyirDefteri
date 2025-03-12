@@ -31,13 +31,14 @@
             dtpCikisTarihi = new DateTimePicker();
             dtpVarisTarihi = new DateTimePicker();
             lvGonderimZRaporu = new ListView();
-            button2 = new Button();
-            button3 = new Button();
+            btnExcelDosyasiOlustur = new Button();
+            btnMailGonder = new Button();
+            btnPdfOlustur = new Button();
             SuspendLayout();
             // 
             // dtpCikisTarihi
             // 
-            dtpCikisTarihi.Location = new Point(43, 44);
+            dtpCikisTarihi.Location = new Point(31, 30);
             dtpCikisTarihi.Name = "dtpCikisTarihi";
             dtpCikisTarihi.Size = new Size(333, 32);
             dtpCikisTarihi.TabIndex = 0;
@@ -45,7 +46,7 @@
             // 
             // dtpVarisTarihi
             // 
-            dtpVarisTarihi.Location = new Point(779, 44);
+            dtpVarisTarihi.Location = new Point(767, 30);
             dtpVarisTarihi.Name = "dtpVarisTarihi";
             dtpVarisTarihi.Size = new Size(333, 32);
             dtpVarisTarihi.TabIndex = 0;
@@ -53,39 +54,51 @@
             // 
             // lvGonderimZRaporu
             // 
-            lvGonderimZRaporu.Location = new Point(43, 101);
+            lvGonderimZRaporu.Location = new Point(31, 87);
             lvGonderimZRaporu.Name = "lvGonderimZRaporu";
             lvGonderimZRaporu.Size = new Size(1069, 352);
             lvGonderimZRaporu.TabIndex = 1;
             lvGonderimZRaporu.UseCompatibleStateImageBehavior = false;
             // 
-            // button2
+            // btnExcelDosyasiOlustur
             // 
-            button2.BackColor = SystemColors.GradientActiveCaption;
-            button2.Location = new Point(641, 476);
-            button2.Name = "button2";
-            button2.Size = new Size(256, 52);
-            button2.TabIndex = 2;
-            button2.Text = "Excel Dosyası Oluştur";
-            button2.UseVisualStyleBackColor = false;
+            btnExcelDosyasiOlustur.BackColor = SystemColors.GradientActiveCaption;
+            btnExcelDosyasiOlustur.Location = new Point(302, 462);
+            btnExcelDosyasiOlustur.Name = "btnExcelDosyasiOlustur";
+            btnExcelDosyasiOlustur.Size = new Size(252, 68);
+            btnExcelDosyasiOlustur.TabIndex = 2;
+            btnExcelDosyasiOlustur.Text = "Excel Dosyası Oluştur";
+            btnExcelDosyasiOlustur.UseVisualStyleBackColor = false;
+            btnExcelDosyasiOlustur.Click += btnExcelDosyasiOlustur_Click;
             // 
-            // button3
+            // btnMailGonder
             // 
-            button3.BackColor = SystemColors.GradientActiveCaption;
-            button3.Location = new Point(903, 476);
-            button3.Name = "button3";
-            button3.Size = new Size(209, 52);
-            button3.TabIndex = 2;
-            button3.Text = "Mail Gönder";
-            button3.UseVisualStyleBackColor = false;
+            btnMailGonder.BackColor = SystemColors.GradientActiveCaption;
+            btnMailGonder.Location = new Point(821, 462);
+            btnMailGonder.Name = "btnMailGonder";
+            btnMailGonder.Size = new Size(279, 68);
+            btnMailGonder.TabIndex = 2;
+            btnMailGonder.Text = "Excel Dosyasını Mail At";
+            btnMailGonder.UseVisualStyleBackColor = false;
+            // 
+            // btnPdfOlustur
+            // 
+            btnPdfOlustur.BackColor = SystemColors.GradientActiveCaption;
+            btnPdfOlustur.Location = new Point(575, 462);
+            btnPdfOlustur.Name = "btnPdfOlustur";
+            btnPdfOlustur.Size = new Size(225, 68);
+            btnPdfOlustur.TabIndex = 2;
+            btnPdfOlustur.Text = "PDF Oluştur";
+            btnPdfOlustur.UseVisualStyleBackColor = false;
             // 
             // FRMZRaporu
             // 
             AutoScaleDimensions = new SizeF(13F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1155, 563);
-            Controls.Add(button3);
-            Controls.Add(button2);
+            ClientSize = new Size(1137, 562);
+            Controls.Add(btnMailGonder);
+            Controls.Add(btnPdfOlustur);
+            Controls.Add(btnExcelDosyasiOlustur);
             Controls.Add(lvGonderimZRaporu);
             Controls.Add(dtpVarisTarihi);
             Controls.Add(dtpCikisTarihi);
@@ -102,7 +115,8 @@
         private DateTimePicker dtpCikisTarihi;
         private DateTimePicker dtpVarisTarihi;
         private ListView lvGonderimZRaporu;
-        private Button button2;
-        private Button button3;
+        private Button btnExcelDosyasiOlustur;
+        private Button btnMailGonder;
+        private Button btnPdfOlustur;
     }
 }
