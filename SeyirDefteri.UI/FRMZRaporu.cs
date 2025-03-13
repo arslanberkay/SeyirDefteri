@@ -15,7 +15,7 @@ namespace SeyirDefteri.UI
 {
     public partial class FRMZRaporu : Form
     {
-        private List<Gonderim> gonderimler;
+        private List<Gonderim> gonderimler; //2. formdan veri aktarımı yaptığım gönderim listesini bu listeye aktardım.
 
         public FRMZRaporu()
         {
@@ -30,10 +30,10 @@ namespace SeyirDefteri.UI
 
         private void ListViewTabloOlustur()
         {
-            lvGonderimZRaporu.View = View.Details;
-            lvGonderimZRaporu.GridLines = true;
+            lvGonderimZRaporu.View = View.Details; //Listview görünümünü detaylı hale getirmek için
+            lvGonderimZRaporu.GridLines = true; //Hücrelere böldü.
 
-            lvGonderimZRaporu.Columns.Add("Gemi Adı ", 200);
+            lvGonderimZRaporu.Columns.Add("Gemi Adı ", 200);  //ListView başlıklarını ekliyoruz.
             lvGonderimZRaporu.Columns.Add("Firma Adı", 200, HorizontalAlignment.Center);
             lvGonderimZRaporu.Columns.Add("Ürün Adı", 200, HorizontalAlignment.Center);
             lvGonderimZRaporu.Columns.Add("Ürün Yükü", 200, HorizontalAlignment.Center);
@@ -53,19 +53,26 @@ namespace SeyirDefteri.UI
         {
             lvGonderimZRaporu.Items.Clear();
 
+            //gonderimler listemde dönüyorum ve istediğim şartları sağlayan gonderimleri filtrelenmisSeferler listesinin içine atıyorum.
             var filtrelenmisSeferler = gonderimler.Where(s => s.SeyirKaydi.LimandanCikisTarihi.Date >= cikisTarihi && s.SeyirKaydi.LimanaVarisTarihi.Date <= varisTarihi).ToList();
 
             foreach (Gonderim filtrelenmisSefer in filtrelenmisSeferler)
             {
-                ListViewItem listViewItem = new ListViewItem();
+                ListViewItem listViewItem = new ListViewItem(); //Listviewin içine itemlarını yerleştirmek için
                 listViewItem.Text = filtrelenmisSefer.SeyirKaydi.Gemi.GemiAdi.ToString();
                 listViewItem.SubItems.Add(filtrelenmisSefer.IlgilenenKisi.BagliOlduguFirma.ToString());
                 listViewItem.SubItems.Add(filtrelenmisSefer.Urun.UrunAdi.ToString());
                 listViewItem.SubItems.Add(filtrelenmisSefer.Tonaj.ToString());
                 listViewItem.SubItems.Add((filtrelenmisSefer.SeyirKaydi.Gemi.Tonaji - filtrelenmisSefer.Tonaj).ToString());
                 listViewItem.SubItems.Add(filtrelenmisSefer.IlgilenenKisi.KisininAdi.ToString());
-                listViewItem.SubItems.Add(filtrelenmisSefer.SeyirKaydi.LimandanCikisTarihi.ToString());
+                listViewItem.SubItems.Add(filtrelenmisSefer.SeyirKaydi.LimandanCikisTarihi.ToString("dd/MM/yyyy")); //MMM olsa Mart yazıyor.
                 listViewItem.SubItems.Add(filtrelenmisSefer.SeyirKaydi.LimanaVarisTarihi.ToString());
+
+                if (filtrelenmisSefer.SeyirKaydi.Gemi.Tonaji < filtrelenmisSefer.Tonaj)
+                {
+                    MessageBox.Show("Gemi tonajından fazla yük yüklenemez");
+                    return;
+                }
 
                 lvGonderimZRaporu.Items.Add(listViewItem);
             }
@@ -82,12 +89,13 @@ namespace SeyirDefteri.UI
         }
 
         int excelDosyaNumarasi = 0;
-        private void btnExcelDosyasiOlustur_Click(object sender, EventArgs e)
+        private void ExcelDosyasiOlustur() //ClosedXML kütüphanesini kullanarak ListView kontrolündeki verileri bir Excel dosyasına aktardım.
         {
-            using (var workbook = new XLWorkbook())
+            using (var workbook = new XLWorkbook())//Yeni bir Excel çalışma kitabı oluşturuluyor.
             {
-                var workSheet = workbook.AddWorksheet("ZRaporu");
+                var workSheet = workbook.AddWorksheet("ZRaporu"); //Workbook içine ZRaporu adında yeni bir çalışma sayfası ekledim.
 
+                //Başlık satırlarını ekledim.
                 workSheet.Cell(1, 1).Value = "Gemi Adı";
                 workSheet.Cell(1, 2).Value = "Firma Adı";
                 workSheet.Cell(1, 3).Value = "Ürün Adı";
@@ -97,7 +105,7 @@ namespace SeyirDefteri.UI
                 workSheet.Cell(1, 7).Value = "Limandan Çıkış Tarihi";
                 workSheet.Cell(1, 8).Value = "Limana Varış Tarihi";
 
-                int satir = 2;
+                int satir = 2; //lvgonderim adlı ListView kontrolünde bulunan veriler döngü ile Excel'e yazılıyor.
                 foreach (ListViewItem item in lvGonderimZRaporu.Items)
                 {
                     workSheet.Cell(satir, 1).Value = item.SubItems[0].Text;
@@ -111,20 +119,27 @@ namespace SeyirDefteri.UI
                     satir++;
                 }
 
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                //Excel Dosyasının Kaydedilmesi
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog()) //Kullanıcıdan Excel dosyasını kaydetmek istediği yeri seçmesi için bir SaveFileDiolog penceresi açılıyor.
                 {
-                    saveFileDialog.Filter = "Excel Files|*xlsx";
-                    saveFileDialog.Title = "Excel Dosyasını Kaydet";
-                    saveFileDialog.FileName = $"ZRaporu{excelDosyaNumarasi++}.xlsx";
+                    saveFileDialog.Filter = "Excel Files|*xlsx"; //Sadece .xlsx uzantılı dosyaların kaydedilmesine izin veriliyor.
+                    saveFileDialog.Title = "Excel Dosyasını Kaydet"; //Pencere başlığı 
+                    saveFileDialog.FileName = $"ZRaporu{excelDosyaNumarasi++}.xlsx"; //Varsayılan dosa adı ayarlanıyor.
 
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    //Kullanıcının seçtiği konuma kaydetme
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK) //Kullanıcı dosya kaydetme işlemini onaylarsa
                     {
-                        string filePath = saveFileDialog.FileName;
-                        workbook.SaveAs(filePath);
+                        string filePath = saveFileDialog.FileName; //Dosyanın kaydedileceği yolu alır.
+                        workbook.SaveAs(filePath); //Excel dosyası belirtilen konuma kaydedilir.
                         MessageBox.Show("Excel başarıyla oluşturuldu.");
                     }
                 }
             }
+        }
+
+        private void btnExcelDosyasiOlustur_Click(object sender, EventArgs e)
+        {
+            ExcelDosyasiOlustur();
         }
     }
 }
