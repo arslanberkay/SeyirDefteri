@@ -9,7 +9,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,14 +37,14 @@ namespace SeyirDefteri.UI
             lvGonderimZRaporu.View = View.Details; //Listview görünümünü detaylı hale getirmek için
             lvGonderimZRaporu.GridLines = true; //Hücrelere böldü.
 
-            lvGonderimZRaporu.Columns.Add("Gemi Adı ", 200);  //ListView başlıklarını ekliyoruz.
-            lvGonderimZRaporu.Columns.Add("Firma Adı", 200, HorizontalAlignment.Center);
+            lvGonderimZRaporu.Columns.Add("Gemi Adı ", 250);  //ListView başlıklarını ekliyoruz.
+            lvGonderimZRaporu.Columns.Add("Firma Adı", 250, HorizontalAlignment.Center);
             lvGonderimZRaporu.Columns.Add("Ürün Adı", 200, HorizontalAlignment.Center);
             lvGonderimZRaporu.Columns.Add("Ürün Yükü", 200, HorizontalAlignment.Center);
-            lvGonderimZRaporu.Columns.Add("Kalan Tonaj", 200, HorizontalAlignment.Center);
-            lvGonderimZRaporu.Columns.Add("İlgilenen Kişi Adı", 200, HorizontalAlignment.Center);
-            lvGonderimZRaporu.Columns.Add("Limandan Çıkış Tarihi", 200, HorizontalAlignment.Center);
-            lvGonderimZRaporu.Columns.Add("Limana Varış Tarihi", 200, HorizontalAlignment.Center);
+            lvGonderimZRaporu.Columns.Add("İlgilenen Kişi Adı", 250, HorizontalAlignment.Center);
+            lvGonderimZRaporu.Columns.Add("Limandan Çıkış Tarihi", 300, HorizontalAlignment.Center);
+            lvGonderimZRaporu.Columns.Add("Limana Varış Tarihi", 300, HorizontalAlignment.Center);
+            lvGonderimZRaporu.Columns.Add("Kalan Tonaj Bilgisi", 350, HorizontalAlignment.Center);
         }
 
         private void FRMZRaporu_Load(object sender, EventArgs e)
@@ -56,29 +57,73 @@ namespace SeyirDefteri.UI
         {
             lvGonderimZRaporu.Items.Clear();
 
-            //gonderimler listemde dönüyorum ve istediğim şartları sağlayan gonderimleri filtrelenmisSeferler listesinin içine atıyorum.
-            var filtrelenmisSeferler = gonderimler.Where(s => s.SeyirKaydi.LimandanCikisTarihi.Date >= cikisTarihi && s.SeyirKaydi.LimanaVarisTarihi.Date <= varisTarihi).ToList();
+            #region Tonaj Kontrolsüz
+            ////gonderimler listemde dönüyorum ve istediğim şartları sağlayan gonderimleri filtrelenmisSeferler listesinin içine atıyorum.
+            //var filtrelenmisSeferler = gonderimler.Where(s => s.SeyirKaydi.LimandanCikisTarihi.Date >= cikisTarihi && s.SeyirKaydi.LimanaVarisTarihi.Date <= varisTarihi).ToList();
 
-            foreach (Gonderim filtrelenmisSefer in filtrelenmisSeferler)
+            //foreach (Gonderim filtrelenmisSefer in filtrelenmisSeferler)
+            //{
+            //    ListViewItem listViewItem = new ListViewItem(); //Listviewin içine itemlarını yerleştirmek için
+            //    listViewItem.Text = filtrelenmisSefer.SeyirKaydi.Gemi.GemiAdi.ToString();
+            //    listViewItem.SubItems.Add(filtrelenmisSefer.IlgilenenKisi.BagliOlduguFirma.ToString());
+            //    listViewItem.SubItems.Add(filtrelenmisSefer.Urun.UrunAdi.ToString());
+            //    listViewItem.SubItems.Add(filtrelenmisSefer.Tonaj.ToString());
+            //    listViewItem.SubItems.Add((filtrelenmisSefer.SeyirKaydi.Gemi.Tonaji - filtrelenmisSefer.Tonaj).ToString());
+            //    listViewItem.SubItems.Add(filtrelenmisSefer.IlgilenenKisi.KisininAdi.ToString());
+            //    listViewItem.SubItems.Add(filtrelenmisSefer.SeyirKaydi.LimandanCikisTarihi.ToString("dd/MM/yyyy")); //MMM olsa Mart yazıyor.
+            //    listViewItem.SubItems.Add(filtrelenmisSefer.SeyirKaydi.LimanaVarisTarihi.ToString());
+
+            //    if (filtrelenmisSefer.SeyirKaydi.Gemi.Tonaji < filtrelenmisSefer.Tonaj)
+            //    {
+            //        MessageBox.Show("Gemi tonajından fazla yük yüklenemez");
+            //        return;
+            //    }
+
+            //    lvGonderimZRaporu.Items.Add(listViewItem);
+            //}
+            #endregion
+
+            #region Tonaj Kontrollü
+            //Bu kod belirli bir çıkış ve varış tarihi arasındaki gönderimleri gemilere göre gruplar ve her gemi için toplam kullanılan tonajı hesaplayarak kalan kapasiteyi belirler. SOnuçlar bir ListView kontrolüne eklenir.
+
+            //Gönderimlerin tarihe göre filtrelenmesi
+            var gemiBazliGonderimler = gonderimler.Where(g => g.SeyirKaydi.LimandanCikisTarihi.Date >= cikisTarihi.Date && g.SeyirKaydi.LimanaVarisTarihi.Date <= varisTarihi.Date).GroupBy(g => g.SeyirKaydi.Gemi.GemiAdi).ToList();  //gonderimler listesindeki gonderimler çıkış ve varış tarihi aralığına göre filtreleniyor. Gemi adına göre gruplandırılıyor.(aynı gemiye ait gönderimler bir araya getiriliyor.) Sonuç bir liste olarak saklanıyor.
+
+            foreach (var grup in gemiBazliGonderimler)
             {
-                ListViewItem listViewItem = new ListViewItem(); //Listviewin içine itemlarını yerleştirmek için
-                listViewItem.Text = filtrelenmisSefer.SeyirKaydi.Gemi.GemiAdi.ToString();
-                listViewItem.SubItems.Add(filtrelenmisSefer.IlgilenenKisi.BagliOlduguFirma.ToString());
-                listViewItem.SubItems.Add(filtrelenmisSefer.Urun.UrunAdi.ToString());
-                listViewItem.SubItems.Add(filtrelenmisSefer.Tonaj.ToString());
-                listViewItem.SubItems.Add((filtrelenmisSefer.SeyirKaydi.Gemi.Tonaji - filtrelenmisSefer.Tonaj).ToString());
-                listViewItem.SubItems.Add(filtrelenmisSefer.IlgilenenKisi.KisininAdi.ToString());
-                listViewItem.SubItems.Add(filtrelenmisSefer.SeyirKaydi.LimandanCikisTarihi.ToString("dd/MM/yyyy")); //MMM olsa Mart yazıyor.
-                listViewItem.SubItems.Add(filtrelenmisSefer.SeyirKaydi.LimanaVarisTarihi.ToString());
+                decimal gemiTonaji = grup.First().SeyirKaydi.Gemi?.Tonaji ?? 0; //Grup içinde bir geminin ilk gönderiminden gemi tonajı alınıyor. Eğer null ise 0 atanıyor.(önlem olarak)
+                decimal toplamKullanilanTonaj = 0; 
 
-                if (filtrelenmisSefer.SeyirKaydi.Gemi.Tonaji < filtrelenmisSefer.Tonaj)
+                foreach (var gonderim in grup) //Gruptaki her gönderim içinde dönüyor
                 {
-                    MessageBox.Show("Gemi tonajından fazla yük yüklenemez");
-                    return;
-                }
+                    toplamKullanilanTonaj += gonderim.Tonaj; //Her gönderimin tonajı toplam kullanılan tonaja ekleniyor
+                    decimal kalanTonaj = gemiTonaji - toplamKullanilanTonaj;
 
-                lvGonderimZRaporu.Items.Add(listViewItem);
+                    //Gönderim bilgileri ListViewItem içine ekleniyor.
+                    ListViewItem listViewItem = new ListViewItem();
+                    listViewItem.Text = gonderim.SeyirKaydi.Gemi.GemiAdi;
+                    listViewItem.SubItems.Add(gonderim.IlgilenenKisi.BagliOlduguFirma.FirmaAdi);
+                    listViewItem.SubItems.Add(gonderim.Urun.UrunAdi);
+                    listViewItem.SubItems.Add(gonderim.Tonaj.ToString());
+                    listViewItem.SubItems.Add(gonderim.IlgilenenKisi.KisininAdi);
+                    listViewItem.SubItems.Add(gonderim.SeyirKaydi.LimandanCikisTarihi.ToString());
+                    listViewItem.SubItems.Add(gonderim.SeyirKaydi.LimanaVarisTarihi.ToString());
+
+                    if (kalanTonaj >= 0) //Eğer kalan tonaj sıfır veya pozitifse doğrudan eklenir.
+                    {
+                        listViewItem.SubItems.Add(kalanTonaj.ToString());
+                    }
+                    else
+                    {
+                        listViewItem.SubItems.Add("Gemi kapasitesi doldu!");
+                    }
+                    lvGonderimZRaporu.Items.Add(listViewItem);
+                }
             }
+
+
+            #endregion
+
         }
 
         private void dtpCikisTarihi_ValueChanged(object sender, EventArgs e)
@@ -195,6 +240,66 @@ namespace SeyirDefteri.UI
         private void btnPdfOlustur_Click(object sender, EventArgs e)
         {
             PDFOlustur();
+        }
+
+        private void btnMailGonder_Click(object sender, EventArgs e)
+        {
+            ExcelDosyasiniMailAt();
+        }
+
+        /// <summary>
+        /// Bu metod bir ListView bileşenindeki verileri Excel dosyasına aktarıp ardından bu Excel dosyasını e-posta ekinde gönderir
+        /// </summary>
+        private void ExcelDosyasiniMailAt()
+        {
+            try
+            {   //Excel dosyasının masaüstüne kaydedileceği yolu belirler.
+                string excelDosyaYolu = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "GönderimZraporu.xlsx");
+                using (var workbook = new XLWorkbook()) //Yeni bir Excel dosyası oluşturur. ClosedXML kütüphanesini kullanır.
+                {
+                    var worksheet = workbook.Worksheets.Add("Gönderim ZRaporu"); //Yeni bir çalışma sayfası(sheet) oluşturur.
+
+                    //ListView başlıklarını Excel'e yazma
+                    for (int col = 0; col < lvGonderimZRaporu.Columns.Count; col++)
+                    {
+                        worksheet.Cell(1, col + 1).Value = lvGonderimZRaporu.Columns[col].Text; //lvGonderimZRaporu adlı ListView bileşenindeki sütun başlıkları. Excel'in ilk satırına ekleniyor.
+                    }
+
+                    //ListView içeriğini Excel'e yazma
+                    int row = 2;
+                    foreach (ListViewItem listviewitem in lvGonderimZRaporu.Items) //Tüm ListView öğelerini tek tek okur
+                    {
+                        for (int i = 0; i < listviewitem.SubItems.Count; i++)
+                        {
+                            worksheet.Cell(row, i + 1).Value = listviewitem.SubItems[i].Text; //Her hücreye uygun değeri yazar.
+                        }
+                        row++;
+                    }
+                    workbook.SaveAs(excelDosyaYolu); //Excel dosyasını belirtilen yola kaydeder.
+                }
+
+                //MailMessage ve SMTPClient sınıfları kullanılarak bir e-posta hazırlanıyor.
+                MailMessage mail = new MailMessage();
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com"); //Gmail SMTP sunucusu kullanıyor.
+
+                mail.From = new MailAddress("berkayarslanyzl@gmail.com");  //Gönderen e-posta adresi
+                mail.To.Add("alici_eposta");  //Alıcı e-posta adresi
+                mail.Subject = "Başlık";  //E-posta konusu
+                mail.Body = "Merhaba İyi çalışmalar,\n Ekteki Dosya gönderimi z raporudur."; //E-posta içeriği
+
+                mail.Attachments.Add(new Attachment(excelDosyaYolu)); //Önceden oluşturulan Excel dosyası e-postaya ekleniyor.
+
+                smtpClient.Port = 587; //Gmail için 587 numaralı SMTP portu kullanılıyor.
+                smtpClient.Credentials = new NetworkCredential("berkayarslanyzl@gmail.com", "//uygulama_sıfre_kodu"); //Gmail hesabının kullanıcı adı ve şifresi giriliyor. Bu şifre doğrudan kod içinde bulunuyor.
+                smtpClient.EnableSsl = true; //Güvenli bağlantı etkinleştiriliyor.
+                smtpClient.Send(mail); //E-posta gönderiliyor.
+
+                MessageBox.Show("Mail başarıyla gönderildi");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Mail gönderimi sırasında bir hata oluştu.\nHata mesajı : {ex.Message}");
+            }
         }
     }
 }

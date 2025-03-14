@@ -46,7 +46,7 @@
             // 
             // dtpVarisTarihi
             // 
-            dtpVarisTarihi.Location = new Point(767, 30);
+            dtpVarisTarihi.Location = new Point(1218, 30);
             dtpVarisTarihi.Name = "dtpVarisTarihi";
             dtpVarisTarihi.Size = new Size(333, 32);
             dtpVarisTarihi.TabIndex = 0;
@@ -56,14 +56,14 @@
             // 
             lvGonderimZRaporu.Location = new Point(31, 87);
             lvGonderimZRaporu.Name = "lvGonderimZRaporu";
-            lvGonderimZRaporu.Size = new Size(1069, 352);
+            lvGonderimZRaporu.Size = new Size(1520, 352);
             lvGonderimZRaporu.TabIndex = 1;
             lvGonderimZRaporu.UseCompatibleStateImageBehavior = false;
             // 
             // btnExcelDosyasiOlustur
             // 
             btnExcelDosyasiOlustur.BackColor = SystemColors.GradientActiveCaption;
-            btnExcelDosyasiOlustur.Location = new Point(302, 462);
+            btnExcelDosyasiOlustur.Location = new Point(753, 458);
             btnExcelDosyasiOlustur.Name = "btnExcelDosyasiOlustur";
             btnExcelDosyasiOlustur.Size = new Size(252, 68);
             btnExcelDosyasiOlustur.TabIndex = 2;
@@ -74,17 +74,18 @@
             // btnMailGonder
             // 
             btnMailGonder.BackColor = SystemColors.GradientActiveCaption;
-            btnMailGonder.Location = new Point(821, 462);
+            btnMailGonder.Location = new Point(1272, 458);
             btnMailGonder.Name = "btnMailGonder";
             btnMailGonder.Size = new Size(279, 68);
             btnMailGonder.TabIndex = 2;
             btnMailGonder.Text = "Excel Dosyasını Mail At";
             btnMailGonder.UseVisualStyleBackColor = false;
+            btnMailGonder.Click += btnMailGonder_Click;
             // 
             // btnPdfOlustur
             // 
             btnPdfOlustur.BackColor = SystemColors.GradientActiveCaption;
-            btnPdfOlustur.Location = new Point(575, 462);
+            btnPdfOlustur.Location = new Point(1026, 458);
             btnPdfOlustur.Name = "btnPdfOlustur";
             btnPdfOlustur.Size = new Size(225, 68);
             btnPdfOlustur.TabIndex = 2;
@@ -96,7 +97,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1137, 562);
+            ClientSize = new Size(1587, 558);
             Controls.Add(btnMailGonder);
             Controls.Add(btnPdfOlustur);
             Controls.Add(btnExcelDosyasiOlustur);
