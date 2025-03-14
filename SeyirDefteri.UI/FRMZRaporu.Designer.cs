@@ -90,6 +90,7 @@
             btnPdfOlustur.TabIndex = 2;
             btnPdfOlustur.Text = "PDF Oluştur";
             btnPdfOlustur.UseVisualStyleBackColor = false;
+            btnPdfOlustur.Click += btnPdfOlustur_Click;
             // 
             // FRMZRaporu
             // 
