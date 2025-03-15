@@ -285,7 +285,7 @@ namespace SeyirDefteri.UI
                 mail.From = new MailAddress("berkayarslanyzl@gmail.com");  //Gönderen e-posta adresi
                 mail.To.Add("alici_eposta");  //Alıcı e-posta adresi
                 mail.Subject = "Başlık";  //E-posta konusu
-                mail.Body = "Merhaba İyi çalışmalar,\n Ekteki Dosya gönderimi z raporudur."; //E-posta içeriği
+                mail.Body = "Merhaba İyi çalışmalar,\n Ekteki Dosya gönderimi ZRaporudur."; //E-posta içeriği
 
                 mail.Attachments.Add(new Attachment(excelDosyaYolu)); //Önceden oluşturulan Excel dosyası e-postaya ekleniyor.
 
